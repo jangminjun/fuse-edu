@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:amq="http://activemq.apache.org/schema/core"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+
+    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost">
+
+      <persistenceAdapter>
+        <kahaDB directory="activemq/kahadb"/>
+      </persistenceAdapter>
+
+        <!-- The transport connectors ActiveMQ will listen to -->
+        <transportConnectors>
+            <transportConnector name="openwire" uri="tcp://localhost:61616" />
+        </transportConnectors>
+    </broker>
+
+    <!--
+        configure the camel activemq component to use the current broker
+    -->
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent"
+        p:brokerURL="vm://localhost?create=false&amp;waitForStart=10000" />
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring" />
+</beans>
