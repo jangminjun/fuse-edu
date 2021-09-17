@@ -1,7 +1,0 @@
-{
-  "type": "fs",
-  "settings": {
-    "location": "/Users/chmoulli/RedHat/GPTE/GPTE-Courses/fuse-lab/chm_backup",
-    "compress": true
-  }
-}
